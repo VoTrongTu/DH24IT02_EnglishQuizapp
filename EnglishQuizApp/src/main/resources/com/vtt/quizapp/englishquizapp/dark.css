@@ -1,0 +1,22 @@
+.container{
+    -fx-background-color: #121212 ;
+    -fx-alignment: CENTER;
+    -fx-spacing: 10;
+}
+
+.subject{
+   -fx-text-fill: #FFFFFF ;
+   -fx-font-size: 40;
+   -fx-font-weight: bold;
+   -fx-font-family: "Verdana";
+   
+   -fx-stroke-width: 3;
+   -fx-stroke: blue;
+}
+
+.Button{
+    -fx-text-fill: #FFFFFF ;
+    -fx-background-color:#333333 ;
+    -fx-pref-width: 200;
+  
+}
