@@ -24,3 +24,4 @@ hs_err_pid*
 replay_pid*
 /quizapp/target/
 /EnglishQuizApp/target/
+/quizappv2/target/
