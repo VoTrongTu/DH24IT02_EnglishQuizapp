@@ -1,10 +1,10 @@
-package com.dht.quizappv2;
+package com.vtt.quizappv2;
 
-import com.dht.utils.MyAlertSingleton;
-import com.dht.utils.MyStageSingleton;
-import com.dht.utils.themes.DarkFactory;
-import com.dht.utils.themes.ThemeManager;
-import com.dht.utils.themes.ThemeTypes;
+import com.vtt.utils_.MyAlertSingleton;
+import com.vtt.utils_.MyStageSingleton;
+import com.vtt.utils.themes.DarkFactory;
+import com.vtt.utils.themes.ThemeManager;
+import com.vtt.utils.themes.ThemeTypes;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;

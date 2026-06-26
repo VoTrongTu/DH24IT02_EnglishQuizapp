@@ -1,4 +1,4 @@
-package com.dht.quizappv2;
+package com.vtt.quizappv2;
 
 import java.io.IOException;
 import javafx.fxml.FXML;

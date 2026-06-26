@@ -2,9 +2,10 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package com.dht.utils;
+package com.vtt.utils_;
 
-import com.dht.quizappv2.App;
+import com.vtt.quizappv2.App;
+import com.vtt.utils.themes.ThemeManager;
 import java.io.IOException;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -31,14 +32,17 @@ public class MyStageSingleton {
     
     public void showStage(String fxml){
         if(!this.stage.isShowing()){
-            Scene scene = null;
             try {
-                scene = new Scene(new FXMLLoader(App.class.getResource(fxml+".fxml")).load());
+               Scene scene = new Scene(new FXMLLoader(App.class.getResource(fxml + ".fxml")).load());
+               
+                ThemeManager.applyTheme(scene); 
+               
+               this.stage.setScene(scene);
+               this.stage.show();
             } catch (IOException ex) {
                 ex.printStackTrace();
             }
-            this.stage.setScene(scene);
-            this.stage.show();
+            
         }
                     
     }

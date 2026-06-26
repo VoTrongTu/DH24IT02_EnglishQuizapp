@@ -6,7 +6,7 @@
 <?import javafx.scene.text.Text?>
 
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="434.0" prefWidth="338.0" styleClass="Container" stylesheets="@styles.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.dht.quizappv2.PrimaryController">
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="434.0" prefWidth="338.0" styleClass="Container" stylesheets="@styles.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.vtt.quizappv2.PrimaryController">
    <children>
       <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="Subject" text="English Quiz App" />
       <Button mnemonicParsing="false" onAction="#manageQuestion" styleClass="Button" text="Quản lý câu hỏi" />
