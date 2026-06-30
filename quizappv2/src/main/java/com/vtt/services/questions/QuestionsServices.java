@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package com.vtt.services;
+package com.vtt.services.questions;
 
 import com.vtt.utils_.MyConnSingleton;
 import com.vtt.pojo.Question;
@@ -24,10 +24,10 @@ public class QuestionsServices {
         
         List <Question> questions =     new ArrayList<>();
         while(rs.next()){
-            Question q = new Question();
-            q.setId(rs.getInt("id"));
-            q.setContent(rs.getString("content"));
-            questions.add(q);
+//            Question q = new Question();
+//            q.setId(rs.getInt("id"));
+//            q.setContent(rs.getString("content"));
+            questions.add(new Question.QuestionBuilder().setId(rs.getInt("id")).setContent(rs.getString("content")).build());
         }
         return questions;
     }

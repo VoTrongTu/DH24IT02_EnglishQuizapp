@@ -4,6 +4,7 @@
  */
 package com.vtt.pojo;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -18,8 +19,58 @@ public class Question {
     private Category category;
     private Level level;
     private List<Choice> choice;
+    
+    private Question(QuestionBuilder b){
+        this.id= b.id;
+        this.content =  b.content;
+        this.hint = b.hint;
+        this.image = b.image;
+        this.category = b.category;
+        this.level = b.level;
+        this.choice =b.choice;
+    }
 
-   
+   public static  class QuestionBuilder{
+       private int id;
+       private String content;
+       private String image;
+       private String hint;
+       private Category category;
+       private Level level;
+       private List<Choice> choice;
+       
+       public QuestionBuilder()
+       {
+           this.choice = new ArrayList<>();
+       }
+       public QuestionBuilder setId(int id){
+           this.id= id;
+           return this;
+       }
+       
+       public QuestionBuilder setContent(String content){
+           this.content = content;
+           return this;
+       }
+       
+       public QuestionBuilder setCategory(Category c){
+           this.category =c;
+           return this;
+       }
+       
+       public QuestionBuilder setLevel(Level l){
+           this.level = l;
+           return this;
+       }
+       
+       public QuestionBuilder addChoice(Choice c){
+           this.choice.add(c);
+           return this;
+       }
+       public Question build(){
+           return new Question(this);
+       }
+}
 
     /**
      * @return the id

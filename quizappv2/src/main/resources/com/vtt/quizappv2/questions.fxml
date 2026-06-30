@@ -10,11 +10,17 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Text?>
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" styleClass="Container" stylesheets="@styles.css" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.vtt.quizappv2.QuestionsController">
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="529.0" prefWidth="711.0" styleClass="Container" stylesheets="@styles.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.vtt.quizappv2.QuestionsController">
    <children>
       <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="Subject" text="Quản lý câu hỏi" />
-      <TextArea prefHeight="134.0" prefWidth="600.0" promptText="Nội dung câu hỏi" />
-      <VBox prefHeight="200.0" prefWidth="100.0">
+      <TextArea fx:id="txtContent" prefHeight="134.0" prefWidth="600.0" promptText="Nội dung câu hỏi" />
+      <HBox styleClass="Container">
+         <children>
+            <ComboBox fx:id="cbCates" prefWidth="150.0" promptText="Danh sách câu hỏi" styleClass="Button" />
+            <ComboBox fx:id="cbLevels" prefWidth="150.0" styleClass="Button" />
+         </children>
+      </HBox>
+      <VBox fx:id="vChoices" prefHeight="200.0" prefWidth="100.0" styleClass="Container">
          <children>
             <HBox prefHeight="100.0" prefWidth="200.0" styleClass="Container">
                <children>
@@ -32,11 +38,10 @@
       </VBox>
       <HBox prefHeight="100.0" prefWidth="200.0" styleClass="Container">
          <children>
-            <Button mnemonicParsing="false" style="-fx-background-color: red;" styleClass="Button" text="Thêm câu hỏi" />
-            <Button mnemonicParsing="false" styleClass="Button" text="Thêm phương án" />
+            <Button mnemonicParsing="false" onAction="#addQuestion" style="-fx-background-color: red;" styleClass="Button" text="Thêm câu hỏi" />
+            <Button mnemonicParsing="false" onAction="#addChoice" styleClass="Button" text="Thêm phương án" />
          </children>
       </HBox>
-      <ComboBox fx:id="cbCates" prefWidth="150.0" promptText="Danh sách câu hỏi" styleClass="Button" />
       <TableView fx:id="tvQuestions" prefHeight="200.0" prefWidth="200.0" />
    </children>
 </VBox>

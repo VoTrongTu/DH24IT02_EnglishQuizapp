@@ -27,7 +27,7 @@ public class MyAlertSingleton {
         return instance;
     }
     
-    public void showMsg(String content) {
+    public void showAlert(String content) {
         this.alert.setContentText(content);
         this.alert.show();
     }

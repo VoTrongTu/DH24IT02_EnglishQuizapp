@@ -28,7 +28,7 @@ public class MyConnSingleton {
     
     private MyConnSingleton(){
         try {
-            this.conn = DriverManager.getConnection("jdbc:mysql://localhost/quizdb", "root", "Votrongtu10@");
+            this.conn = DriverManager.getConnection("jdbc:mysql://localhost/quizdb", "root", "root");
         } catch (SQLException ex) {
             Logger.getLogger(MyConnSingleton.class.getName()).log(Level.SEVERE, null, ex);
         }

@@ -38,11 +38,11 @@ public class PrimaryController implements Initializable {
     }
     
     public void practice(ActionEvent e) {
-        MyAlertSingleton.getInstance().showMsg("Comming soon...");
+        MyAlertSingleton.getInstance().showAlert("Comming soon...");
     }
     
     public void exam(ActionEvent e) {
-        MyAlertSingleton.getInstance().showMsg("Comming soon...");
+        MyAlertSingleton.getInstance().showAlert("Comming soon...");
     }
 
     public void changeTheme(ActionEvent e) {
