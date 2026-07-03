@@ -14,6 +14,7 @@ import com.vtt.services.questions.QuestionsServices;
 import com.vtt.utils_.Configs;
 import com.vtt.utils_.MyAlertSingleton;
 import java.net.URL;
+import java.nio.file.OpenOption;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -21,6 +22,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 import java.util.logging.Logger;
@@ -28,6 +30,9 @@ import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TableCell;
@@ -35,6 +40,8 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.control.Toggle;
+import javafx.scene.control.ToggleGroup;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
@@ -45,11 +52,15 @@ import javafx.scene.layout.VBox;
  * @author admin
  */
 public class QuestionsController implements Initializable {
+
     @FXML private TextArea txtContent;
     @FXML private ComboBox<Category> cbCates;
     @FXML private ComboBox<Level> cbLevels;
+    @FXML private ComboBox<Category> cbSearchCates;
+    @FXML private ComboBox<Level> cbSearchLevels;
     @FXML private TableView<Question> tvQuestions;
     @FXML private VBox vChoices;
+    @FXML private ToggleGroup toggle;
 
     /**
      * Initializes the controller class.
@@ -57,14 +68,15 @@ public class QuestionsController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         this.loadColumns();
-        
-        try {
 
+        try {
             this.cbCates.setItems(FXCollections.observableList(Configs.cateService.getCates()));
             this.cbLevels.setItems(FXCollections.observableList(Configs.lvlService.getLevels()));
-            this.tvQuestions.setItems(FXCollections.observableList(Configs.questionService.getQuestions(null)));
+            this.cbSearchCates.setItems(FXCollections.observableList(Configs.cateService.getCates()));
+            this.cbSearchLevels.setItems(FXCollections.observableList(Configs.lvlService.getLevels()));
+            this.tvQuestions.setItems(FXCollections.observableList(Configs.questionService.getQuestions(null, null, null)));
         } catch (SQLException ex) {
-//            Logger.getLogger(QuestionsController.class.getName()).log(Level.SEVERE, null, ex);
+            System.err.println(ex.getMessage());
         }
     }
 
@@ -84,37 +96,44 @@ public class QuestionsController implements Initializable {
         HBox h = new HBox();
         h.getStyleClass().add("Container");
 
-        RadioButton rod = new RadioButton();
+        RadioButton rdo = new RadioButton();
+        rdo.setToggleGroup(toggle);
         TextField txt = new TextField();
         txt.getStyleClass().add("input");
-        
+
         //thêm rod txt và Hbox
-        h.getChildren().addAll(rod, txt);
-        
+        h.getChildren().addAll(rdo, txt);
+
         this.vChoices.getChildren().add(h);
     }
 
-    public void addQuestion(ActionEvent e){
+    public void addQuestion(ActionEvent e) {
         Question q = new Question.QuestionBuilder().setContent(txtContent.getText())
                 .setCategory(cbCates.getSelectionModel().getSelectedItem())
                 .setLevel(cbLevels.getSelectionModel().getSelectedItem()).build();
-        
+
         List<Choice> choices = new ArrayList<>();
-        for( var hBox: this.vChoices.getChildren()){
-            HBox h =(HBox)hBox;
-            
-            RadioButton rdo = (RadioButton)h.getChildren().get(0);
-            TextField txt = (TextField)h.getChildren().get(1);
-            
-            choices.add(new Choice(txt.getText(),rdo.isSelected()));
+        for (var hBox : this.vChoices.getChildren()) {
+            HBox h = (HBox) hBox;
+
+            RadioButton rdo = (RadioButton) h.getChildren().get(0);
+            TextField txt = (TextField) h.getChildren().get(1);
+
+            choices.add(new Choice(txt.getText(), rdo.isSelected()));
         }
         try {
-            Configs.uQuestionService.addQuestion(q, choices);
-            MyAlertSingleton.getInstance().showAlert("Thêm câu hỏi thành công!");
+            Optional<ButtonType> b = MyAlertSingleton.getInstance().showAlert("Bạn có chắc thêm không!", Alert.AlertType.CONFIRMATION);
+            if (b.isPresent() && b.get() == ButtonType.OK) {
+                Configs.uQuestionService.addQuestion(q, choices);
+                MyAlertSingleton.getInstance().showAlert("Thêm câu hỏi thành công!");
+            }
         } catch (SQLException ex) {
-            MyAlertSingleton.getInstance().showAlert("Thêm câu hỏi thất bại "+ ex.getMessage());
+            MyAlertSingleton.getInstance().showAlert("Thêm câu hỏi thất bại, do: " + ex.getMessage(), Alert.AlertType.ERROR);
         }
     }
     
-    
+    public void searchQuestion(ActionEvent e){
+        
+    }
+
 }

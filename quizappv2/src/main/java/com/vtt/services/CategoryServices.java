@@ -5,6 +5,7 @@
 package com.vtt.services;
 import com.vtt.utils_.MyConnSingleton;
 import com.vtt.pojo.Category;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -18,7 +19,7 @@ import java.util.List;
 public class CategoryServices {
     public List<Category> getCates() throws SQLException{
          String sql = "SELECT * FROM category";
-            Statement stm = MyConnSingleton.getInstance().connect().createStatement(); 
+            PreparedStatement stm = MyConnSingleton.getInstance().connect().prepareCall(sql); 
             ResultSet rs  = stm.executeQuery(sql); 
             
             List<Category> cates = new ArrayList<>();

@@ -4,7 +4,9 @@
  */
 package com.vtt.utils_;
 
+import java.util.Optional;
 import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 
 /**
  *
@@ -30,5 +32,11 @@ public class MyAlertSingleton {
     public void showAlert(String content) {
         this.alert.setContentText(content);
         this.alert.show();
+    }
+    
+    public Optional <ButtonType> showAlert(String content, Alert.AlertType type){
+        this.alert.setContentText(content);
+        this.alert.setAlertType(type);
+        return this.alert.showAndWait();
     }
 }

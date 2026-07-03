@@ -19,3 +19,11 @@
     -fx-padding: 10;
     -fx-pref-width: 250;
 }
+
+.combo-box .list-cell {
+    -fx-text-fill: white;
+}
+
+.combo-box-popup .list-view .list-cell {
+    -fx-text-fill: black;
+}

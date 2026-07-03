@@ -54,12 +54,12 @@ public class Question {
        }
        
        public QuestionBuilder setCategory(Category c){
-           this.category =c;
+           this.category = c;
            return this;
        }
        
-       public QuestionBuilder setLevel(Level l){
-           this.level = l;
+       public QuestionBuilder setLevel(Level lvl){
+           this.level = lvl;
            return this;
        }
        

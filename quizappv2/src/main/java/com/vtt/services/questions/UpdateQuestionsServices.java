@@ -22,7 +22,6 @@ public class UpdateQuestionsServices {
     public void addQuestion(Question question, List<Choice> choices) throws SQLException {
         Connection conn = MyConnSingleton.getInstance().connect();
 
-       
         conn.setAutoCommit(false); //nếu dl sai thi đồng bộ dl 
         String sql = "INSERT INTO question(content, category_id, level_id) VALUES(?, ?, ?)";
 
@@ -42,7 +41,7 @@ public class UpdateQuestionsServices {
                 for (var c : choices) {
                     stm.setString(1, c.getContent());
                     stm.setBoolean(2, c.isCorrect());
-                    stm.setInt(3, r);
+                    stm.setInt(3, qId);
                     
                     stm.executeUpdate();
                 }

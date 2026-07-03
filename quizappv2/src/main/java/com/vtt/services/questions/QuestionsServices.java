@@ -4,6 +4,8 @@
  */
 package com.vtt.services.questions;
 
+import com.vtt.pojo.Category;
+import com.vtt.pojo.Level;
 import com.vtt.utils_.MyConnSingleton;
 import com.vtt.pojo.Question;
 import java.sql.PreparedStatement;
@@ -17,16 +19,29 @@ import java.util.List;
  * @author TuPC
  */
 public class QuestionsServices {
-    public List<Question> getQuestions(String kw) throws SQLException{
-        String sql = "SELECT * FROM question";
-        PreparedStatement stm = MyConnSingleton.getInstance().connect().prepareCall(sql);
-        ResultSet rs = stm.executeQuery();
+    public List<Question> getQuestions(String kw, Category c, Level lvl) throws SQLException{
+        String sql = "SELECT * FROM question WHERE 1=1";
         
+        List <Object> params = new ArrayList<>();
+        if(kw != null && !kw.isEmpty()){
+            sql += " AND content like concat('%', ?, '%')";
+            params.add(kw);
+        }
+        if (c != null) {
+            sql += " AND category_id = ?";
+            params.add(c.getId());
+        }
+        if(lvl != null){
+            sql += " AND level_id = ?";
+            params.add(lvl.getId());
+        }
+        
+        PreparedStatement stm = MyConnSingleton.getInstance().connect().prepareCall(sql);
+        for(int i=0;i<params.size();i++)
+            stm.setObject(i+1, params.get(i));
+        ResultSet rs = stm.executeQuery();
         List <Question> questions =     new ArrayList<>();
         while(rs.next()){
-//            Question q = new Question();
-//            q.setId(rs.getInt("id"));
-//            q.setContent(rs.getString("content"));
             questions.add(new Question.QuestionBuilder().setId(rs.getInt("id")).setContent(rs.getString("content")).build());
         }
         return questions;
