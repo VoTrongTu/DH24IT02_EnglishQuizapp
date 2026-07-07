@@ -8,6 +8,7 @@ import com.vtt.pojo.Category;
 import com.vtt.pojo.Choice;
 import com.vtt.pojo.Level;
 import com.vtt.pojo.Question;
+import com.vtt.pojo.QuestionQueryBuilder;
 import com.vtt.services.CategoryServices;
 import com.vtt.services.LevelServices;
 import com.vtt.services.questions.QuestionsServices;
@@ -61,6 +62,7 @@ public class QuestionsController implements Initializable {
     @FXML private TableView<Question> tvQuestions;
     @FXML private VBox vChoices;
     @FXML private ToggleGroup toggle;
+    @FXML private TextField txtSearchText;
 
     /**
      * Initializes the controller class.
@@ -68,16 +70,25 @@ public class QuestionsController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         this.loadColumns();
-
+        this.loadTableQuestion();
         try {
             this.cbCates.setItems(FXCollections.observableList(Configs.cateService.getCates()));
             this.cbLevels.setItems(FXCollections.observableList(Configs.lvlService.getLevels()));
             this.cbSearchCates.setItems(FXCollections.observableList(Configs.cateService.getCates()));
             this.cbSearchLevels.setItems(FXCollections.observableList(Configs.lvlService.getLevels()));
-            this.tvQuestions.setItems(FXCollections.observableList(Configs.questionService.getQuestions(null, null, null)));
         } catch (SQLException ex) {
             System.err.println(ex.getMessage());
         }
+        
+        this.txtSearchText.textProperty().addListener(e -> {
+            this.loadTableQuestion();
+        });
+        this.cbSearchCates.getSelectionModel().selectedItemProperty().addListener(e -> {
+            this.loadTableQuestion();
+        });
+         this.cbSearchLevels.getSelectionModel().selectedItemProperty().addListener(e -> {
+            this.loadTableQuestion();
+        });
     }
 
     public void loadColumns() {
@@ -132,8 +143,17 @@ public class QuestionsController implements Initializable {
         }
     }
     
-    public void searchQuestion(ActionEvent e){
-        
+    private void loadTableQuestion() {
+        try {
+            QuestionQueryBuilder query =  new QuestionQueryBuilder().widthKeyWords(this.txtSearchText.getText())
+                    .widthCategory(this.cbSearchCates.getSelectionModel().getSelectedItem())
+                    .widthLevel(this.cbSearchLevels.getSelectionModel().getSelectedItem());
+            Configs.questionService.setSql(query);
+            
+            this.tvQuestions.setItems(FXCollections.observableList(Configs.questionService.getQuestions()));
+        } catch (SQLException ex) {
+            Logger.getLogger(QuestionsController.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        }
     }
 
 }
