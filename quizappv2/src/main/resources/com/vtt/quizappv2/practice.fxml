@@ -8,8 +8,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Text?>
 
-
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" styleClass="Container" stylesheets="@styles.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.vtt.quizappv2.PracticeController">
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" styleClass="Container" stylesheets="@styles.css" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.vtt.quizappv2.PracticeController">
    <children>
       <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="Subject" text="LUYỆN tẬP" />
       <HBox prefHeight="100.0" prefWidth="200.0" styleClass="Container">
@@ -20,13 +19,13 @@
             <Button mnemonicParsing="false" onAction="#start" text="Bắt đầu" />
          </children>
       </HBox>
-      <Label text="Mội dung câu hỏi...." />
-      <VBox prefHeight="200.0" prefWidth="100.0" />
+      <Label fx:id="lblContent" text="Mội dung câu hỏi...." />
+      <VBox fx:id="vchoices" prefHeight="200.0" prefWidth="100.0" spacing="10.0" />
       <HBox prefHeight="100.0" prefWidth="200.0" styleClass="Container">
          <children>
-            <Button mnemonicParsing="false" styleClass="Button" text="&lt;&lt;" />
-            <Button mnemonicParsing="false" style="-fx-background-color: red;" styleClass="Button" text="Kiểm tra" />
-            <Button mnemonicParsing="false" styleClass="Button" text="&gt;&gt;" />
+            <Button mnemonicParsing="false" onAction="#previous" styleClass="Button" text="&lt;&lt;" />
+            <Button mnemonicParsing="false" onAction="#checkAnswer" style="-fx-background-color: red;" styleClass="Button" text="Kiểm tra" />
+            <Button mnemonicParsing="false" onAction="#next" styleClass="Button" text="&gt;&gt;" />
          </children>
       </HBox>
    </children>

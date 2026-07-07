@@ -67,6 +67,12 @@ public class Question {
            this.choice.add(c);
            return this;
        }
+       
+       public QuestionBuilder setChoice(List<Choice> choice){
+           this.setChoice(choice);
+           return this;
+       }
+       
        public Question build(){
            return new Question(this);
        }

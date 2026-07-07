@@ -19,7 +19,7 @@ import java.util.List;
  *
  * @author TuPC
  */
-public class QuestionsServices {
+public class QuestionsServices extends QuestionServicesBase{
     private QuestionQueryBuilder query;
 
     public QuestionsServices() {

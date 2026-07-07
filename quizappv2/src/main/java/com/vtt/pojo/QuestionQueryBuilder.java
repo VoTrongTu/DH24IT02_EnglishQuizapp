@@ -55,7 +55,7 @@ public class QuestionQueryBuilder {
     }
     
     public QuestionQueryBuilder setLimit(int limit) {
-        if (this.query.toString().toLowerCase().contains("limit")) {
+        if (!this.query.toString().toLowerCase().contains("limit")) {
             this.query.append(" LIMIT ?");
             this.params.add(limit);
         }
