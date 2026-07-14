@@ -8,6 +8,7 @@ import com.vtt.pojo.Category;
 import com.vtt.pojo.Level;
 import com.vtt.pojo.Question;
 import com.vtt.pojo.QuestionQueryBuilder;
+import com.vtt.services.FlyWeightFactory;
 import com.vtt.services.questions.QuestionServicesDecorator;
 import com.vtt.utils_.Configs;
 import com.vtt.utils_.MyAlertSingleton;
@@ -46,22 +47,22 @@ public class PracticeController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        try {
-            this.cbSearchCates.setItems(FXCollections.observableList(Configs.cateService.getCates()));
-            this.cbSearchLevels.setItems(FXCollections.observableList(Configs.lvlService.getLevels()));
-        } catch (SQLException ex) {
-            System.out.println(ex.getMessage());
-        }
+//        try {
+            this.cbSearchCates.setItems(FXCollections.observableList(FlyWeightFactory.getData(Configs.cateService, Configs.CATE_KEY)));
+            this.cbSearchLevels.setItems(FXCollections.observableList(FlyWeightFactory.getData(Configs.lvlService, Configs.LVL_KEY)));
+//        } catch (SQLException ex) {
+//            System.out.println(ex.getMessage());
+//        }
     }    
     
     public void start(ActionEvent e){
         QuestionQueryBuilder b = new QuestionQueryBuilder()
-                .setLimit(this.txtNum.getText()).setOrderBy("rand()")
+                .setLimit(this.txtNum.getText()).setOrderBy(" RAND()")
                 .widthCategory(this.cbSearchCates.getSelectionModel().getSelectedItem())
                 .widthLevel(this.cbSearchLevels.getSelectionModel().getSelectedItem());
         Configs.questionService.setSql(b);
         try {
-            this.questions =  new QuestionServicesDecorator(Configs.questionService).getQuestions();
+            this.questions =  new QuestionServicesDecorator(Configs.questionService).list();
             this.loadQuestion(1);
         } catch (SQLException ex) {
             Logger.getLogger(PracticeController.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);

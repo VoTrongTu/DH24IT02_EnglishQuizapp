@@ -19,4 +19,7 @@ public class Configs {
     public static final LevelServices lvlService = new LevelServices();
     public static final QuestionsServices questionService = new QuestionsServices();
     public static final UpdateQuestionsServices uQuestionService  =  new UpdateQuestionsServices();
+    public static final String CATE_KEY = "categories";
+    public static final String LVL_KEY = "levels";
+    public static final double[] RATES = {0.4, 0.4 ,0.2};
 }

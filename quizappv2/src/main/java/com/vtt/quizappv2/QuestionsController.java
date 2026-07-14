@@ -10,6 +10,7 @@ import com.vtt.pojo.Level;
 import com.vtt.pojo.Question;
 import com.vtt.pojo.QuestionQueryBuilder;
 import com.vtt.services.CategoryServices;
+import com.vtt.services.FlyWeightFactory;
 import com.vtt.services.LevelServices;
 import com.vtt.services.questions.QuestionsServices;
 import com.vtt.utils_.Configs;
@@ -71,14 +72,14 @@ public class QuestionsController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         this.loadColumns();
         this.loadTableQuestion();
-        try {
-            this.cbCates.setItems(FXCollections.observableList(Configs.cateService.getCates()));
-            this.cbLevels.setItems(FXCollections.observableList(Configs.lvlService.getLevels()));
-            this.cbSearchCates.setItems(FXCollections.observableList(Configs.cateService.getCates()));
-            this.cbSearchLevels.setItems(FXCollections.observableList(Configs.lvlService.getLevels()));
-        } catch (SQLException ex) {
-            System.err.println(ex.getMessage());
-        }
+//        try {
+            this.cbCates.setItems(FXCollections.observableList(FlyWeightFactory.getData(Configs.cateService, Configs.CATE_KEY)));
+            this.cbLevels.setItems(FXCollections.observableList(FlyWeightFactory.getData(Configs.lvlService, Configs.LVL_KEY)));
+            this.cbSearchCates.setItems(FXCollections.observableList(FlyWeightFactory.getData(Configs.cateService, Configs.CATE_KEY)));
+            this.cbSearchLevels.setItems(FXCollections.observableList(FlyWeightFactory.getData(Configs.lvlService, Configs.LVL_KEY)));
+//        } catch (SQLException ex) {
+//            System.err.println(ex.getMessage());
+//        }
         
         this.txtSearchText.textProperty().addListener(e -> {
             this.loadTableQuestion();
@@ -150,7 +151,7 @@ public class QuestionsController implements Initializable {
                     .widthLevel(this.cbSearchLevels.getSelectionModel().getSelectedItem());
             Configs.questionService.setSql(query);
             
-            this.tvQuestions.setItems(FXCollections.observableList(Configs.questionService.getQuestions()));
+            this.tvQuestions.setItems(FXCollections.observableList(Configs.questionService.list()));
         } catch (SQLException ex) {
             Logger.getLogger(QuestionsController.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }

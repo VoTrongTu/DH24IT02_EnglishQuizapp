@@ -20,6 +20,11 @@ public class Question {
     private Level level;
     private List<Choice> choice;
     
+      @Override
+        public String toString() {
+            return this.content; // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/OverriddenMethodBody
+        }
+        
     private Question(QuestionBuilder b){
         this.id= b.id;
         this.content =  b.content;
@@ -47,6 +52,7 @@ public class Question {
            this.id= id;
            return this;
        }
+
        
        public QuestionBuilder setContent(String content){
            this.content = content;
@@ -76,7 +82,7 @@ public class Question {
        public Question build(){
            return new Question(this);
        }
-}
+    }
 
     /**
      * @return the id

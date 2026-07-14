@@ -12,6 +12,6 @@ import java.util.List;
  *
  * @author TuPC
  */
-public abstract class QuestionServicesBase {
-     public abstract List<Question> getQuestions() throws SQLException;
+public interface  QuestionServicesBase {
+      List<Question> list() throws SQLException;
 }
