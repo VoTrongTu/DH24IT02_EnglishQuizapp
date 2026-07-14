@@ -22,4 +22,5 @@ public class Configs {
     public static final String CATE_KEY = "categories";
     public static final String LVL_KEY = "levels";
     public static final double[] RATES = {0.4, 0.4 ,0.2};
+    public static final int EXAM_NUM = 10;
 }

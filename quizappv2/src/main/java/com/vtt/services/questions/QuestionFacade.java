@@ -15,8 +15,15 @@ import java.util.List;
  * @author admin
  */
 public class QuestionFacade {
+    // lấy ko kém phương án lựa chọn
     public static List<Question> getQuestion(QuestionQueryBuilder query) throws SQLException{
         Configs.questionService.setSql(query);
         return Configs.questionService.list();
+    }
+    
+    // Lấy có kém theo phương án lựa chọn
+    public static List<Question> getLazyQuestions(QuestionQueryBuilder quey) throws SQLException{
+        Configs.questionService.setSql(quey);
+        return new QuestionServicesDecorator(Configs.questionService).list();
     }
 }

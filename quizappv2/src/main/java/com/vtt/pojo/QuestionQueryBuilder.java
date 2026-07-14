@@ -45,10 +45,19 @@ public class QuestionQueryBuilder {
     public QuestionQueryBuilder widthLevel(Level lvl){
          if(lvl != null){
              this.where.append(" AND level_id = ?");
-             this.params.add(lvl);
+             this.params.add(lvl.getId());
         }
          return this;
     }
+    
+    public QuestionQueryBuilder widthLevel(int lvlId){
+         if(lvlId > 0){
+             this.where.append(" AND level_id = ?");
+             this.params.add(lvlId);
+        }
+         return this;
+    }
+    
     public QuestionQueryBuilder setOrderBy(String orderBy){
         this.orderBy = orderBy;
         return this;

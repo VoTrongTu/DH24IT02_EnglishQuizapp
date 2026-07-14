@@ -33,7 +33,7 @@ public class SpecificExam implements ExamStratery{
         QuestionQueryBuilder query = new QuestionQueryBuilder().setLimit(this.num).setOrderBy(" RAND()");
        
         try {
-            return QuestionFacade.getQuestion(query);
+            return QuestionFacade.getLazyQuestions(query);
         } catch (SQLException ex) {
             Logger.getLogger(SpecificExam.class.getName()).log(Level.SEVERE, null, ex);
         }

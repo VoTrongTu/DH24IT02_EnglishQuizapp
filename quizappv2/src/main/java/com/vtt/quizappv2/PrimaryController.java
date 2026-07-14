@@ -1,9 +1,6 @@
 package com.vtt.quizappv2;
 
-import com.vtt.utils_.MyAlertSingleton;
 import com.vtt.utils_.MyStageSingleton;
-import com.vtt.utils.themes.DarkFactory;
-import com.vtt.utils.themes.ThemeManager;
 import com.vtt.utils.themes.ThemeTypes;
 import java.io.IOException;
 import java.net.URL;
@@ -11,12 +8,8 @@ import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Scene;
-import javafx.scene.control.Alert;
 import javafx.scene.control.ComboBox;
-import javafx.stage.Stage;
 
 
 public class PrimaryController implements Initializable {
@@ -28,12 +21,6 @@ public class PrimaryController implements Initializable {
     }
     
     public void manageQuestion(ActionEvent e) throws IOException {
-        //MyAlertSingleton.getInstance().showMsg("Comming soon...");
-//        Stage stage = new Stage();
-//        Scene scene   = new Scene(new FXMLLoader(App.class.getResource("questions.fxml")).load());
-//        stage.setScene(scene);
-//        stage.show();
-
           MyStageSingleton.getInstance().showStage("questions");
     }
     
